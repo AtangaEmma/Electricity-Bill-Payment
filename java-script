@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+public class ElectricityBillPayment {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Welcome message
+        System.out.println("Welcome to the Electricity Bill Payment System");
+
+        // User input for customer details
+        System.out.print("Enter your Customer ID: ");
+        String customerId = scanner.nextLine();
+
+        System.out.print("Enter your Name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter the number of units consumed: ");
+        int units = scanner.nextInt();
+
+        // Calculate the bill amount
+        double billAmount = calculateBill(units);
+
+        // Display bill details
+        System.out.println("\n--- Electricity Bill Details ---");
+        System.out.println("Customer ID: " + customerId);
+        System.out.println("Customer Name: " + customerName);
+        System.out.println("Units Consumed: " + units);
+        System.out.println("Total Bill Amount: $" + billAmount);
+
+        // Confirm payment
+        System.out.print("\nDo you want to pay the bill? (yes/no): ");
+        scanner.nextLine(); // Consume the leftover newline
+        String confirmation = scanner.nextLine();
+
+        if (confirmation.equalsIgnoreCase("yes")) {
+            System.out.println("\nPayment Successful! Thank you for using the Electricity Bill Payment System.");
+        } else {
+            System.out.println("\nPayment Cancelled. Please pay your bill before the due date.");
+        }
+
+        // Exit
+        System.out.println("\nGoodbye!");
+        scanner.close();
+    }
+
+    /**
+     * Method to calculate the electricity bill based on units consumed.
+     * 
+     * @param units The number of units consumed.
+     * @return The total bill amount.
+     */
+    public static double calculateBill(int units) {
+        double ratePerUnit;
+
+        // Define rates per unit based on consumption slabs
+        if (units <= 100) {
+            ratePerUnit = 1.5; // $1.5 per unit for the first 100 units
+        } else if (units <= 300) {
+            ratePerUnit = 2.5; // $2.5 per unit for 101-300 units
+        } else {
+            ratePerUnit = 4.0; // $4.0 per unit for above 300 units
+        }
+
+        // Calculate total bill amount
+        return units * ratePerUnit;
+    }
+}
